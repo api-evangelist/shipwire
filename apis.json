@@ -1,0 +1,107 @@
+{
+    "name": "Shipwire",
+    "description": "The cloud-based platform to power your global logistics network | An @IngramCommerce Brand",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/478-shipwire.jpg",
+    "tags": [
+        "have api",
+        "new",
+        "shipping",
+        "shipping stac",
+        "webhook implementations"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/shipwire\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Shipwire",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/478-shipwire.jpg",
+            "humanURL": "http:\/\/www.shipwire.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/shipwire-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/shipwire-postman-collection.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Base",
+            "url": "https:\/\/api.shipwire.com"
+        },
+        {
+            "type": "Blog",
+            "url": "http:\/\/www.shipwire.com\/w\/blog\/"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "http:\/\/feeds.feedburner.com\/shipwire"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/shipwire"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "http:\/\/www.crunchbase.com\/company\/shipwire"
+        },
+        {
+            "type": "Developers",
+            "url": "http:\/\/www.shipwire.com\/developers\/"
+        },
+        {
+            "type": "Email",
+            "url": "info@shipwire.com"
+        },
+        {
+            "type": "Email",
+            "url": "security@shipwire.com"
+        },
+        {
+            "type": "Email",
+            "url": "customercare@shipwire.com"
+        },
+        {
+            "type": "Email",
+            "url": "Legal@shipwire.com"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/shipwire"
+        },
+        {
+            "type": "Pricing",
+            "url": "https:\/\/www.shipwire.com\/pricing\/"
+        },
+        {
+            "type": "Road Map",
+            "url": "https:\/\/www.shipwire.com\/w\/developers\/roadmap\/"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/shipwire"
+        },
+        {
+            "type": "Webhooks",
+            "url": "https:\/\/www.shipwire.com\/w\/developers\/webhook\/"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/www.shipwire.com"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/www.shipwire.com\/"
+        }
+    ]
+}
