@@ -1,0 +1,89 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Shipwire",
+  "url": "https://www.shipwire.com/",
+  "description": "Shipwire is a global fulfillment and third-party logistics (3PL) platform providing a REST API for managing orders, inventory, warehousing, shipments, returns, and carrier selection across a worldwide network of fulfillment centers.",
+  "sameAs": [
+    "https://x.com/shipwire",
+    "https://www.linkedin.com/company/shipwire-inc-"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Shipwire APIs",
+    "itemListElement": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Shipwire Order API",
+        "description": "Create new orders and update, cancel, or get information about existing outbound B2C orders. Includes shipment details such as shipping box dimensions, contents, and tracking information.",
+        "url": "https://www.shipwire.com/developers/",
+        "applicationCategory": "BusinessApplication"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Shipwire Stock API",
+        "description": "Track inventory levels and stock across Shipwire fulfillment centers in real time.",
+        "url": "https://www.shipwire.com/developers/",
+        "applicationCategory": "BusinessApplication"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Shipwire Receiving API",
+        "description": "Manage inbound inventory arrivals and create Advanced Shipping Notices (ASNs) to suppliers to streamline warehouse receiving operations.",
+        "url": "https://www.shipwire.com/developers/",
+        "applicationCategory": "BusinessApplication"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Shipwire Returns API",
+        "description": "Generate return labels, postage, and return tracking information by notifying the Shipwire Platform when an order is being returned by a customer.",
+        "url": "https://www.shipwire.com/developers/",
+        "applicationCategory": "BusinessApplication"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Shipwire Rate API",
+        "description": "Compare real-time shipping quotes across carriers and service levels, or by warehouse, to select the optimal carrier for each shipment.",
+        "url": "https://www.shipwire.com/developers/rate/",
+        "applicationCategory": "BusinessApplication"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Shipwire Product API",
+        "description": "Manage product catalogs, marketing inserts, and product kits within the Shipwire fulfillment platform.",
+        "url": "https://www.shipwire.com/developers/",
+        "applicationCategory": "BusinessApplication"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Shipwire Purchase Order API",
+        "description": "Create, edit, and cancel purchase orders in the Shipwire system for B2B fulfillment workflows.",
+        "url": "https://www.shipwire.com/developers/",
+        "applicationCategory": "BusinessApplication"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Shipwire Webhooks API",
+        "description": "Subscribe to real-time push notifications for various fulfillment events to trigger workflows in external systems.",
+        "url": "https://www.shipwire.com/developers/",
+        "applicationCategory": "BusinessApplication"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Shipwire Address Validation API",
+        "description": "Validate shipping addresses before submitting orders to reduce failed deliveries and improve fulfillment accuracy.",
+        "url": "https://www.shipwire.com/developers/",
+        "applicationCategory": "BusinessApplication"
+      }
+    ]
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.shipwire.com/support/policy-fees-minimum-balance-and-ancillary-charges/"
+  },
+  "subjectOf": {
+    "@type": "WebSite",
+    "name": "Shipwire Developer Portal",
+    "url": "https://www.shipwire.com/developers/"
+  }
+}
