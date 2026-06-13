@@ -1,0 +1,80 @@
+name: Shipwire Plans and Pricing
+description: Shipwire uses a pay-as-you-go pricing model based on actual usage of fulfillment services. There are no fixed subscription tiers for the software itself; charges are incurred for warehousing, pick and pack, shipping, and ancillary services.
+url: https://www.shipwire.com/support/policy-fees-minimum-balance-and-ancillary-charges/
+plans:
+  - name: Pay-As-You-Go
+    description: Standard fulfillment pricing with no fixed monthly software fee. Charges are based on actual services used including receiving, storage, pick and pack, and shipping. Volume discounts are automatically applied for higher-volume shippers.
+    url: https://www.shipwire.com/support/policy-fees-minimum-balance-and-ancillary-charges/
+    price: 0.00
+    unit: per month software fee
+    features:
+      - REST API access included
+      - Sandbox/beta environment access
+      - Webhooks and real-time notifications
+      - 70+ prebuilt ecommerce integrations
+      - Multi-warehouse global fulfillment
+      - Carrier rate shopping
+      - Returns management
+      - Business reporting
+    limits:
+      - name: Account Balance
+        description: Customers must maintain a positive account balance to use services
+      - name: Minimum Balance Hold
+        description: Minimum balance may be held for up to 180 days after account closure
+fees:
+  - name: Pick and Pack
+    description: Per unit handling fee for picking and packing orders
+    price: 0.20
+    unit: per unit (approximate, volume discounts apply)
+  - name: Carton Receiving
+    description: Fee for receiving cartons of inventory
+    price: 2.69
+    unit: per carton
+  - name: Deassortment
+    description: Fee for deassortment services
+    price: 0.59
+    unit: per unit
+  - name: Returns/Refusals
+    description: Fee for processing returned or refused items
+    price: 3.50
+    unit: per unit
+  - name: Long-Term Storage (6-12 months)
+    description: Extended storage fee for inventory held 6-12 months
+    price: 10.25
+    unit: per cubic foot per month
+  - name: Long-Term Storage (12+ months)
+    description: Extended storage fee for inventory held over 12 months
+    price: 20.50
+    unit: per cubic foot per month
+  - name: Standard Hourly Rate
+    description: Hourly rate for standard labor services
+    price: 40.00
+    unit: per hour
+  - name: IT Services Hourly Rate
+    description: Hourly rate for IT-related services
+    price: 185.00
+    unit: per hour
+  - name: Floor-Loaded Container
+    description: Fee for floor-loaded container receiving
+    price: 430.00
+    unit: per container
+  - name: Administration Fee (Insufficient Funds)
+    description: Fee applied per item when account lacks funds and no valid payment method
+    price: 0.10
+    unit: per item (maximum)
+  - name: AUP Violation Fine
+    description: Minimum fine for Acceptable Use Policy violations
+    price: 500.00
+    unit: per violation (minimum)
+  - name: Third-Party Carrier Back Billing
+    description: Processing fee for third-party carrier back billing
+    description2: 2x shipping value or $500 USD, whichever is less
+    unit: per occurrence
+  - name: Customs Duties Processing Fee
+    description: Processing fee for customs duties or taxes
+    price: 500.00
+    unit: per receiving
+  - name: Interest on Past-Due Amounts
+    description: Monthly interest rate on past-due balances
+    rate: 1.5
+    unit: percent per month (or highest rate permitted by law)

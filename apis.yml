@@ -1,0 +1,172 @@
+aid: shipwire
+name: Shipwire
+description: Shipwire is a global fulfillment and third-party logistics (3PL) platform providing a REST API for managing orders, inventory, warehousing, shipments, returns, and carrier selection across a worldwide network of fulfillment centers. The platform serves eCommerce brands with nine distinct RESTful APIs covering order management, stock tracking, receiving, returns, rate shopping, product catalogs, purchase orders, webhooks, and address validation, enabling fully automated fulfillment workflows.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/shipwire/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+type: Index
+tags:
+  - Fulfillment
+  - Logistics
+  - 3PL
+  - eCommerce
+  - Shipping
+  - Warehousing
+  - Inventory
+  - Orders
+  - Returns
+  - Carriers
+apis:
+  - aid: shipwire:shipwire-order-api
+    name: Shipwire Order API
+    description: Create new orders and update, cancel, or get information about existing outbound B2C orders. Includes shipment details such as shipping box dimensions, contents, and tracking information.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.shipwire.com/developers/
+    baseURL: https://api.shipwire.com/
+    tags:
+      - Orders
+      - Fulfillment
+      - Shipping
+      - Tracking
+    properties:
+      - type: Documentation
+        url: https://www.shipwire.com/developers/
+  - aid: shipwire:shipwire-stock-api
+    name: Shipwire Stock API
+    description: Track inventory levels and stock across Shipwire fulfillment centers in real time.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.shipwire.com/developers/
+    baseURL: https://api.shipwire.com/
+    tags:
+      - Inventory
+      - Stock
+      - Warehousing
+    properties:
+      - type: Documentation
+        url: https://www.shipwire.com/developers/
+  - aid: shipwire:shipwire-receiving-api
+    name: Shipwire Receiving API
+    description: Manage inbound inventory arrivals and create Advanced Shipping Notices (ASNs) to suppliers to streamline warehouse receiving operations.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.shipwire.com/developers/
+    baseURL: https://api.shipwire.com/
+    tags:
+      - Receiving
+      - Inventory
+      - Warehousing
+    properties:
+      - type: Documentation
+        url: https://www.shipwire.com/developers/
+  - aid: shipwire:shipwire-returns-api
+    name: Shipwire Returns API
+    description: Generate return labels, postage, and return tracking information by notifying the Shipwire Platform when an order is being returned by a customer.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.shipwire.com/developers/
+    baseURL: https://api.shipwire.com/
+    tags:
+      - Returns
+      - Shipping
+      - Labels
+    properties:
+      - type: Documentation
+        url: https://www.shipwire.com/developers/
+  - aid: shipwire:shipwire-rate-api
+    name: Shipwire Rate API
+    description: Compare real-time shipping quotes across carriers and service levels, or by warehouse, to select the optimal carrier for each shipment.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.shipwire.com/developers/rate/
+    baseURL: https://api.shipwire.com/
+    tags:
+      - Rates
+      - Carriers
+      - Shipping
+    properties:
+      - type: Documentation
+        url: https://www.shipwire.com/developers/rate/
+  - aid: shipwire:shipwire-product-api
+    name: Shipwire Product API
+    description: Manage product catalogs, marketing inserts, and product kits within the Shipwire fulfillment platform.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.shipwire.com/developers/
+    baseURL: https://api.shipwire.com/
+    tags:
+      - Products
+      - Catalog
+      - Inventory
+    properties:
+      - type: Documentation
+        url: https://www.shipwire.com/developers/
+  - aid: shipwire:shipwire-purchase-order-api
+    name: Shipwire Purchase Order API
+    description: Create, edit, and cancel purchase orders in the Shipwire system for B2B fulfillment workflows. POs can be approved to generate fulfillment orders.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.shipwire.com/developers/
+    baseURL: https://api.shipwire.com/
+    tags:
+      - Purchase Orders
+      - B2B
+      - Fulfillment
+    properties:
+      - type: Documentation
+        url: https://www.shipwire.com/developers/
+  - aid: shipwire:shipwire-webhooks-api
+    name: Shipwire Webhooks API
+    description: Subscribe to real-time push notifications for various fulfillment events to trigger workflows in external systems when order, shipment, or inventory events occur.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.shipwire.com/developers/
+    baseURL: https://api.shipwire.com/
+    tags:
+      - Webhooks
+      - Events
+      - Notifications
+    properties:
+      - type: Documentation
+        url: https://www.shipwire.com/developers/
+  - aid: shipwire:shipwire-address-validation-api
+    name: Shipwire Address Validation API
+    description: Validate shipping addresses before submitting orders to reduce failed deliveries and improve fulfillment accuracy.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.shipwire.com/developers/
+    baseURL: https://api.shipwire.com/
+    tags:
+      - Address Validation
+      - Shipping
+    properties:
+      - type: Documentation
+        url: https://www.shipwire.com/developers/
+common:
+  - type: Website
+    url: https://www.shipwire.com/
+  - type: Documentation
+    url: https://www.shipwire.com/developers/
+  - type: GettingStarted
+    url: https://www.shipwire.com/developers/getting-started/
+  - type: GitHubOrg
+    url: https://github.com/shipwire
+  - type: Blog
+    url: https://www.shipwire.com/blog/
+  - type: Pricing
+    url: https://www.shipwire.com/support/policy-fees-minimum-balance-and-ancillary-charges/
+  - type: StatusPage
+    url: https://status.shipwire.com
+  - type: X
+    url: https://x.com/shipwire
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/shipwire-inc-
+  - type: Plans
+    url: plans/shipwire-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/shipwire-rate-limits.yml
+  - type: FinOps
+    url: finops/shipwire-finops.yml
+  - type: ClientLibraries
+    url: https://www.shipwire.com/developers/client-libraries/
+  - type: Sandbox
+    url: https://api.beta.shipwire.com/
+  - type: DeveloperPortal
+    url: https://www.shipwire.com/platform/empower-developers/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

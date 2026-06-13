@@ -1,0 +1,57 @@
+name: Shipwire FinOps
+description: Financial operations guidance for managing Shipwire API and fulfillment costs. Shipwire operates on a pay-as-you-go model where costs are driven by fulfillment volume, storage duration, warehouse locations, and carrier selection. There is no separate API access fee — costs are tied to physical fulfillment operations.
+url: https://www.shipwire.com/support/policy-fees-minimum-balance-and-ancillary-charges/
+cost_model:
+  type: Pay-As-You-Go
+  description: Costs are consumption-based, tied to physical fulfillment operations. No fixed monthly software fee. API access is included with fulfillment services.
+  billing_cycle: Monthly
+  currency: USD
+cost_drivers:
+  - name: Order Volume
+    description: Pick and pack fees scale with the number of units shipped. Higher volume shippers receive automatic volume discounts.
+    impact: High
+    optimization: Consolidate shipments and use bulk order processing to maximize volume discounts.
+  - name: Storage Duration
+    description: Inventory stored beyond 6 months incurs long-term storage surcharges ($10.25-$20.50 per cubic foot per month). Standard storage rates apply for shorter durations.
+    impact: High
+    optimization: Implement inventory rotation policies to avoid long-term storage fees. Monitor stock levels and remove slow-moving SKUs.
+  - name: Carrier Selection
+    description: The Rate API enables comparison shopping across carriers and service levels. Carrier cost varies significantly by destination, speed, and package dimensions.
+    impact: High
+    optimization: Use the Shipwire Rate API to programmatically select the most cost-effective carrier for each order. Consider dimensional weight pricing.
+  - name: Warehouse Location
+    description: Fulfillment costs vary by warehouse location. Using multiple warehouses can reduce shipping costs but increase storage distribution complexity.
+    impact: Medium
+    optimization: Analyze order geography using Business Reports API to optimize inventory placement across global fulfillment centers.
+  - name: Returns Processing
+    description: Returns are charged at $3.50 per unit. High return rates significantly increase total fulfillment costs.
+    impact: Medium
+    optimization: Use the Returns API to automate return label generation and tracking. Analyze return reasons to reduce return rates.
+  - name: Receiving Efficiency
+    description: Carton receiving at $2.69 per carton and floor-loaded containers at $430.00 per container. Poorly packed shipments increase costs.
+    impact: Medium
+    optimization: Standardize inbound shipping packaging. Use ASN (Advanced Shipping Notices) via the Receiving API to expedite check-in.
+  - name: Account Balance Management
+    description: Insufficient account balances trigger $0.10/item administration fees and service interruptions. Past-due amounts accrue up to 1.5% monthly interest.
+    impact: Low-Medium
+    optimization: Set up automatic account top-ups. Monitor balance via API and set alerts for low balance thresholds.
+monitoring:
+  - name: Business Reports API
+    description: Use Shipwire's Business Reports API to pull cost and volume data programmatically for FinOps analysis
+    url: https://www.shipwire.com/developers/
+  - name: Stock API
+    description: Monitor inventory levels across warehouses to prevent excess storage fees and stockouts
+    url: https://www.shipwire.com/developers/
+  - name: Order API
+    description: Track order fulfillment costs and volumes to identify optimization opportunities
+    url: https://www.shipwire.com/developers/
+  - name: Status Page
+    description: Monitor API and warehouse operational status to anticipate service disruptions that could affect fulfillment SLAs
+    url: https://status.shipwire.com
+alerts:
+  - name: Low Account Balance
+    description: Set up monitoring to alert when account balance approaches the minimum threshold to avoid service interruptions and administration fees
+  - name: Long-Term Storage Approaching
+    description: Alert when inventory approaches 6-month storage threshold to avoid long-term storage surcharges
+  - name: High Return Rate
+    description: Alert when return rates exceed acceptable thresholds as returns are charged at $3.50 per unit

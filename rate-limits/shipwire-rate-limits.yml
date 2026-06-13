@@ -1,0 +1,32 @@
+name: Shipwire API Rate Limits
+description: Shipwire's REST API (v3) rate limit details are not publicly documented. The API uses bearer token authentication and supports pagination with a recommended maximum of 200 records per request. Developers should contact Shipwire support for specific rate limit thresholds applicable to their account tier.
+url: https://www.shipwire.com/developers/getting-started/
+limits:
+  - name: Pagination Maximum
+    description: Recommended maximum number of records per paginated API response
+    limit: 200
+    unit: records per request
+    notes: The API supports configurable pagination limits; 200 is the recommended maximum per request.
+  - name: API Keys
+    description: Maximum number of API tokens that can be generated per Shipwire administrator account
+    limit: 2
+    unit: tokens per administrator
+    notes: Shipwire administrators can generate up to two bearer tokens from the Users and Roles page.
+  - name: Sandbox Environment
+    description: A separate beta/sandbox environment is available for testing at api.beta.shipwire.com
+    notes: Sandbox accounts must be set up separately via the developer startup page. Rate limits in the sandbox environment may differ from production.
+endpoints:
+  - name: Production API
+    url: https://api.shipwire.com/
+    version: v3
+  - name: Sandbox/Beta API
+    url: https://api.beta.shipwire.com/
+    version: v3
+authentication:
+  type: Bearer Token
+  header: Authorization
+  format: "ShipwireKey YOUR_SHIPWIRE_KEY_HERE"
+  notes: All endpoints require HTTPS. Tokens are managed via the Users and Roles page in the Shipwire dashboard.
+contact:
+  description: For specific rate limit information applicable to your account, contact Shipwire developer support
+  email: support+dev@shipwire.com
