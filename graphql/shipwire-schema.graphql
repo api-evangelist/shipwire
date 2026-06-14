@@ -1,0 +1,1002 @@
+"""
+Shipwire GraphQL Schema
+Conceptual schema unifying the Shipwire 3PL fulfillment REST APIs into a
+single GraphQL surface. Covers orders, inventory, warehouses, shipments,
+carriers, rates, returns, receiving, products, webhooks, and auth.
+Source: https://www.shipwire.com/developers/
+"""
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar DateTime
+scalar Date
+scalar JSON
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+"""Lifecycle states for an outbound order."""
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  HELD
+  SHIPPED
+  CANCELLED
+  COMPLETED
+  ERROR
+}
+
+"""Distinguishes the fulfillment model for an order."""
+enum OrderType {
+  B2C
+  B2B
+  KIT
+  DROPSHIP
+}
+
+"""Lifecycle states for a shipment."""
+enum ShipmentStatus {
+  PENDING
+  LABEL_CREATED
+  IN_TRANSIT
+  OUT_FOR_DELIVERY
+  DELIVERED
+  EXCEPTION
+  RETURNED
+}
+
+"""Lifecycle states for a return order."""
+enum ReturnStatus {
+  PENDING
+  IN_TRANSIT
+  RECEIVED
+  RESTOCKED
+  CANCELLED
+  REJECTED
+}
+
+"""Geographic region groupings for Shipwire warehouses."""
+enum WarehouseRegion {
+  US_WEST
+  US_EAST
+  US_CENTRAL
+  CANADA
+  EUROPE
+  ASIA_PACIFIC
+  AUSTRALIA
+}
+
+"""Known carrier names supported by Shipwire."""
+enum CarrierName {
+  UPS
+  FEDEX
+  USPS
+  DHL
+  CANADA_POST
+  PUROLATOR
+  AUSTRALIA_POST
+  ROYAL_MAIL
+  TNT
+  ONTRAC
+  LSO
+  OTHER
+}
+
+"""Reasons an order may be placed on hold."""
+enum HoldReason {
+  ADDRESS_UNVERIFIED
+  PAYMENT_ISSUE
+  FRAUD_REVIEW
+  INVENTORY_SHORTAGE
+  CARRIER_ISSUE
+  MANUAL_HOLD
+  COMPLIANCE_REVIEW
+}
+
+"""Product classification for special handling requirements."""
+enum ProductClass {
+  STANDARD
+  HAZMAT
+  PERISHABLE
+  FRAGILE
+  OVERSIZED
+  LIQUID
+  BATTERY
+}
+
+"""Subscribable Shipwire webhook event types."""
+enum WebhookEvent {
+  ORDER_CREATED
+  ORDER_UPDATED
+  ORDER_SHIPPED
+  ORDER_CANCELLED
+  ORDER_HELD
+  ORDER_COMPLETED
+  SHIPMENT_CREATED
+  SHIPMENT_TRACKING_UPDATED
+  SHIPMENT_DELIVERED
+  INVENTORY_UPDATED
+  INVENTORY_LOW
+  RETURN_CREATED
+  RETURN_RECEIVED
+  RETURN_RESTOCKED
+  RECEIVING_CREATED
+  RECEIVING_COMPLETED
+  PRODUCT_CREATED
+  PRODUCT_UPDATED
+}
+
+"""Weight measurement units."""
+enum WeightUnit {
+  LB
+  OZ
+  KG
+  G
+}
+
+"""Dimension measurement units."""
+enum DimensionUnit {
+  IN
+  CM
+  MM
+}
+
+# ---------------------------------------------------------------------------
+# Address Domain
+# ---------------------------------------------------------------------------
+
+"""A structured shipping address."""
+type ShipAddress {
+  id: ID!
+  name: String
+  company: String
+  address1: String!
+  address2: String
+  city: String!
+  state: String
+  postalCode: String!
+  country: String!
+  phone: String
+  email: String
+  isResidential: Boolean
+  isValidated: Boolean
+  validatedAt: DateTime
+}
+
+input AddressInput {
+  name: String
+  company: String
+  address1: String!
+  address2: String
+  city: String!
+  state: String
+  postalCode: String!
+  country: String!
+  phone: String
+  email: String
+}
+
+"""Result of an address validation check."""
+type AddressValidationResult {
+  isValid: Boolean!
+  correctedAddress: ShipAddress
+  messages: [String!]
+  confidence: Float
+}
+
+# ---------------------------------------------------------------------------
+# Product Domain
+# ---------------------------------------------------------------------------
+
+"""Physical dimensions of a product."""
+type ProductDimensions {
+  length: Float!
+  width: Float!
+  height: Float!
+  unit: DimensionUnit!
+}
+
+"""Weight of a product."""
+type ProductWeight {
+  value: Float!
+  unit: WeightUnit!
+}
+
+"""SKU and barcode identifiers for a product."""
+type ProductSKU {
+  sku: String!
+  upc: String
+  ean: String
+  asin: String
+  externalId: String
+}
+
+"""Extended product attributes."""
+type ProductDetails {
+  dimensions: ProductDimensions
+  weight: ProductWeight
+  sku: ProductSKU!
+  classification: ProductClass
+  countryOfOrigin: String
+  harmonizedCode: String
+  isKit: Boolean
+  kitComponents: [ProductLineItem!]
+  imageUrl: String
+  description: String
+  batteryIncluded: Boolean
+  dangerousGoods: Boolean
+}
+
+"""A product in the Shipwire catalog."""
+type Product {
+  id: ID!
+  name: String!
+  details: ProductDetails!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isActive: Boolean!
+}
+
+"""A product quantity reference used in kits and orders."""
+type ProductLineItem {
+  product: Product!
+  quantity: Int!
+}
+
+input CreateProductInput {
+  name: String!
+  sku: String!
+  upc: String
+  ean: String
+  weight: Float
+  weightUnit: WeightUnit
+  length: Float
+  width: Float
+  height: Float
+  dimensionUnit: DimensionUnit
+  classification: ProductClass
+  countryOfOrigin: String
+  harmonizedCode: String
+  imageUrl: String
+  description: String
+}
+
+input UpdateProductInput {
+  name: String
+  weight: Float
+  weightUnit: WeightUnit
+  length: Float
+  width: Float
+  height: Float
+  dimensionUnit: DimensionUnit
+  classification: ProductClass
+  imageUrl: String
+  description: String
+  isActive: Boolean
+}
+
+input ProductFilter {
+  sku: String
+  isActive: Boolean
+  classification: ProductClass
+}
+
+# ---------------------------------------------------------------------------
+# Warehouse Domain
+# ---------------------------------------------------------------------------
+
+"""Operational capacity metrics for a warehouse."""
+type WarehouseCapacity {
+  totalUnits: Int
+  availableUnits: Int
+  utilizationPercent: Float
+}
+
+"""Detailed information about a fulfillment center."""
+type WarehouseDetails {
+  address: ShipAddress!
+  region: WarehouseRegion!
+  capacity: WarehouseCapacity
+  supportsReceiving: Boolean!
+  supportsReturns: Boolean!
+  supportsHazmat: Boolean!
+  timezone: String
+  operatingHours: String
+}
+
+"""A Shipwire fulfillment center."""
+type Warehouse {
+  id: ID!
+  name: String!
+  abbreviation: String!
+  details: WarehouseDetails!
+  isActive: Boolean!
+  carriers: [Carrier!]
+}
+
+# ---------------------------------------------------------------------------
+# Inventory Domain
+# ---------------------------------------------------------------------------
+
+"""Quantity value with units."""
+type InventoryQuantity {
+  value: Int!
+  unit: String
+}
+
+"""Per-warehouse inventory position for a SKU."""
+type InventoryLocation {
+  warehouse: Warehouse!
+  good: InventoryQuantity!
+  reserved: InventoryQuantity!
+  backordered: InventoryQuantity!
+  receiving: InventoryQuantity!
+  shipping: InventoryQuantity!
+}
+
+"""Detailed inventory breakdown for a SKU."""
+type InventoryDetails {
+  good: InventoryQuantity!
+  reserved: InventoryQuantity!
+  backordered: InventoryQuantity!
+  receiving: InventoryQuantity!
+  shipping: InventoryQuantity!
+  byWarehouse: [InventoryLocation!]!
+}
+
+"""Aggregate inventory record for a SKU."""
+type Inventory {
+  sku: String!
+  product: Product
+  details: InventoryDetails!
+  lastUpdated: DateTime!
+}
+
+input InventoryFilter {
+  sku: String
+  warehouseId: ID
+  hasStock: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Stock Domain
+# ---------------------------------------------------------------------------
+
+"""Granular stock breakdown by lot and location."""
+type StockDetails {
+  lotNumber: String
+  expirationDate: Date
+  locationCode: String
+  quantity: Int!
+}
+
+"""Inbound stock that has not yet been putaway."""
+type StockReceiving {
+  expectedQuantity: Int!
+  receivedQuantity: Int!
+  putawayQuantity: Int!
+  expectedDate: Date
+}
+
+"""Stock position at a specific warehouse for a SKU."""
+type Stock {
+  warehouse: Warehouse!
+  sku: String!
+  available: Int!
+  reserved: Int!
+  details: [StockDetails!]
+  receiving: StockReceiving
+  updatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Carrier Domain
+# ---------------------------------------------------------------------------
+
+"""Detailed carrier capabilities."""
+type CarrierDetails {
+  website: String
+  trackingUrl: String
+  supportedServices: [String!]!
+  supportsInternational: Boolean!
+  supportsSignatureRequired: Boolean!
+  supportsInsurance: Boolean!
+}
+
+"""A shipping carrier supported by Shipwire."""
+type Carrier {
+  id: ID!
+  name: CarrierName!
+  displayName: String!
+  details: CarrierDetails!
+  isActive: Boolean!
+}
+
+# ---------------------------------------------------------------------------
+# Tracking Domain
+# ---------------------------------------------------------------------------
+
+"""An individual scan or status update in a shipment's tracking history."""
+type TrackingEvent {
+  timestamp: DateTime!
+  location: String
+  description: String!
+  statusCode: String
+  isException: Boolean!
+}
+
+"""A tracking number with its carrier association and event history."""
+type TrackingNumber {
+  id: ID!
+  number: String!
+  carrier: Carrier!
+  url: String
+  events: [TrackingEvent!]!
+  estimatedDelivery: DateTime
+  deliveredAt: DateTime
+  isDelivered: Boolean!
+}
+
+# ---------------------------------------------------------------------------
+# Shipment Domain
+# ---------------------------------------------------------------------------
+
+"""Dimensions of a shipping package."""
+type PackageDimensions {
+  length: Float!
+  width: Float!
+  height: Float!
+  unit: DimensionUnit!
+  cubicSize: Float
+}
+
+"""Contents and weight of an individual package."""
+type PackageDetails {
+  weight: Float!
+  weightUnit: WeightUnit!
+  dimensions: PackageDimensions!
+  items: [OrderLineItem!]
+}
+
+"""A physical package within a shipment."""
+type Package {
+  id: ID!
+  trackingNumber: TrackingNumber
+  details: PackageDetails!
+  labelUrl: String
+}
+
+"""The selected shipping service method for a shipment."""
+type ShipmentMethod {
+  carrier: Carrier!
+  service: String!
+  serviceCode: String!
+  isExpedited: Boolean!
+  isInternational: Boolean!
+}
+
+"""Extended shipment metadata."""
+type ShipmentDetails {
+  method: ShipmentMethod!
+  estimatedDelivery: DateTime
+  actualDelivery: DateTime
+  packages: [Package!]!
+  totalWeight: Float
+  weightUnit: WeightUnit
+  cost: Float
+  currency: String
+  labelUrl: String
+}
+
+"""An outbound shipment record."""
+type Shipment {
+  id: ID!
+  order: Order
+  status: ShipmentStatus!
+  details: ShipmentDetails!
+  warehouse: Warehouse!
+  shippedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Order Domain
+# ---------------------------------------------------------------------------
+
+"""Tracking summary attached to an order."""
+type OrderTracking {
+  shipments: [Shipment!]!
+  trackingNumbers: [TrackingNumber!]!
+  isDelivered: Boolean!
+  deliveredAt: DateTime
+}
+
+"""Recipient contact and address for an order."""
+type ShipTo {
+  name: String!
+  company: String
+  address: ShipAddress!
+  phone: String
+  email: String
+}
+
+"""An individual product line within an order."""
+type OrderLineItem {
+  id: ID!
+  product: Product!
+  sku: String!
+  quantity: Int!
+  price: Float
+  currency: String
+}
+
+"""Extended order metadata and configuration."""
+type OrderDetails {
+  orderNumber: String
+  externalId: String
+  purchaseOrder: String
+  giftMessage: String
+  shipperReference: String
+  packingSlip: String
+  requireSignature: Boolean
+  isInsured: Boolean
+  insuranceValue: Float
+  currency: String
+  commercialInvoice: Boolean
+}
+
+"""A top-level outbound fulfillment order."""
+type Order {
+  id: ID!
+  status: OrderStatus!
+  type: OrderType!
+  shipTo: ShipTo!
+  lineItems: [OrderLineItem!]!
+  details: OrderDetails
+  tracking: OrderTracking
+  hold: Hold
+  warehouse: Warehouse
+  shipmentMethod: ShipmentMethod
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  shippedAt: DateTime
+  completedAt: DateTime
+}
+
+input CreateOrderInput {
+  externalId: String
+  orderNumber: String
+  type: OrderType
+  shipTo: AddressInput!
+  recipientName: String!
+  recipientEmail: String
+  recipientPhone: String
+  lineItems: [OrderLineItemInput!]!
+  preferredWarehouseId: ID
+  preferredCarrier: CarrierName
+  preferredService: String
+  requireSignature: Boolean
+  giftMessage: String
+  purchaseOrder: String
+}
+
+input UpdateOrderInput {
+  shipTo: AddressInput
+  recipientName: String
+  recipientEmail: String
+  recipientPhone: String
+  preferredWarehouseId: ID
+  preferredCarrier: CarrierName
+  preferredService: String
+  requireSignature: Boolean
+  giftMessage: String
+}
+
+input OrderLineItemInput {
+  sku: String!
+  quantity: Int!
+  price: Float
+  currency: String
+}
+
+input OrderFilter {
+  status: OrderStatus
+  type: OrderType
+  externalId: String
+  createdAfter: DateTime
+  createdBefore: DateTime
+  warehouseId: ID
+}
+
+# ---------------------------------------------------------------------------
+# Hold Domain
+# ---------------------------------------------------------------------------
+
+"""Hold context including timestamps and resolution."""
+type HoldDetails {
+  reason: HoldReason!
+  notes: String
+  createdAt: DateTime!
+  resolvedAt: DateTime
+  resolvedBy: String
+}
+
+"""A hold record applied to an order."""
+type Hold {
+  id: ID!
+  order: Order!
+  details: HoldDetails!
+  isActive: Boolean!
+}
+
+# ---------------------------------------------------------------------------
+# Rate Domain
+# ---------------------------------------------------------------------------
+
+"""Cost breakdown for a single carrier service option."""
+type RateDetails {
+  carrier: Carrier!
+  service: String!
+  serviceCode: String!
+  estimatedDeliveryDays: Int
+  estimatedDelivery: DateTime
+  baseRate: Float!
+  fuelSurcharge: Float
+  residentialSurcharge: Float
+  insuranceCost: Float
+  totalCost: Float!
+  currency: String!
+  isGuaranteed: Boolean!
+}
+
+"""Shipping rate quote response containing all available options."""
+type Rate {
+  requestId: ID!
+  origin: Warehouse
+  destination: ShipAddress!
+  rates: [RateDetails!]!
+  requestedAt: DateTime!
+}
+
+input RateInput {
+  warehouseId: ID
+  destination: AddressInput!
+  lineItems: [OrderLineItemInput!]!
+  weight: Float
+  weightUnit: WeightUnit
+  length: Float
+  width: Float
+  height: Float
+  dimensionUnit: DimensionUnit
+  isResidential: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Return Domain
+# ---------------------------------------------------------------------------
+
+"""An individual product line in a return order."""
+type ReturnLineItem {
+  id: ID!
+  product: Product!
+  sku: String!
+  quantity: Int!
+  reason: String
+  condition: String
+}
+
+"""Return instructions and label information."""
+type ReturnDetails {
+  originalOrder: Order
+  returnLabel: String
+  returnLabelUrl: String
+  trackingNumber: TrackingNumber
+  instructions: String
+  restockWarehouse: Warehouse
+  currency: String
+  refundAmount: Float
+}
+
+"""A customer return order record."""
+type ReturnOrder {
+  id: ID!
+  status: ReturnStatus!
+  lineItems: [ReturnLineItem!]!
+  details: ReturnDetails!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  receivedAt: DateTime
+  restockedAt: DateTime
+}
+
+input CreateReturnInput {
+  originalOrderId: ID
+  lineItems: [ReturnLineItemInput!]!
+  returnWarehouseId: ID
+  reason: String
+  refundAmount: Float
+  currency: String
+}
+
+input ReturnLineItemInput {
+  sku: String!
+  quantity: Int!
+  reason: String
+  condition: String
+}
+
+input ReturnFilter {
+  status: ReturnStatus
+  originalOrderId: ID
+  createdAfter: DateTime
+  createdBefore: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Receiving Domain
+# ---------------------------------------------------------------------------
+
+"""Expected contents and schedule for an inbound receiving order."""
+type ReceivingDetails {
+  expectedLineItems: [OrderLineItem!]!
+  expectedArrival: Date
+  carrierName: String
+  trackingNumber: String
+  poNumber: String
+  notes: String
+  receivedLineItems: [OrderLineItem!]
+  discrepancies: [String!]
+}
+
+"""An inbound Advanced Shipping Notice / receiving order."""
+type ReceivingOrder {
+  id: ID!
+  warehouse: Warehouse!
+  details: ReceivingDetails!
+  status: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  completedAt: DateTime
+}
+
+input CreateReceivingInput {
+  warehouseId: ID!
+  expectedArrival: Date
+  carrierName: String
+  trackingNumber: String
+  poNumber: String
+  notes: String
+  lineItems: [OrderLineItemInput!]!
+}
+
+input UpdateReceivingInput {
+  expectedArrival: Date
+  carrierName: String
+  trackingNumber: String
+  notes: String
+  lineItems: [OrderLineItemInput!]
+}
+
+input ReceivingFilter {
+  warehouseId: ID
+  status: String
+  createdAfter: DateTime
+  createdBefore: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Auth Domain
+# ---------------------------------------------------------------------------
+
+"""An API credential with scopes and expiry."""
+type APIKey {
+  id: ID!
+  name: String!
+  keyPrefix: String!
+  scopes: [String!]!
+  createdAt: DateTime!
+  expiresAt: DateTime
+  lastUsedAt: DateTime
+  isActive: Boolean!
+}
+
+"""A short-lived authentication token."""
+type Token {
+  accessToken: String!
+  tokenType: String!
+  expiresIn: Int!
+  scopes: [String!]!
+  issuedAt: DateTime!
+}
+
+input CreateAPIKeyInput {
+  name: String!
+  scopes: [String!]!
+  expiresAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Webhook Domain
+# ---------------------------------------------------------------------------
+
+"""A webhook subscription record."""
+type Webhook {
+  id: ID!
+  url: String!
+  events: [WebhookEvent!]!
+  secret: String
+  isActive: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  lastTriggeredAt: DateTime
+  failureCount: Int!
+}
+
+input CreateWebhookInput {
+  url: String!
+  events: [WebhookEvent!]!
+  secret: String
+}
+
+# ---------------------------------------------------------------------------
+# Pagination
+# ---------------------------------------------------------------------------
+
+"""Pagination metadata for list responses."""
+type PageInfo {
+  total: Int!
+  limit: Int!
+  offset: Int!
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+}
+
+"""Paginated list of orders."""
+type OrderConnection {
+  items: [Order!]!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of products."""
+type ProductConnection {
+  items: [Product!]!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of inventory records."""
+type InventoryConnection {
+  items: [Inventory!]!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of return orders."""
+type ReturnOrderConnection {
+  items: [ReturnOrder!]!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of receiving orders."""
+type ReceivingOrderConnection {
+  items: [ReceivingOrder!]!
+  pageInfo: PageInfo!
+}
+
+# ---------------------------------------------------------------------------
+# Root Types
+# ---------------------------------------------------------------------------
+
+type Query {
+  """Fetch a single order by Shipwire order ID."""
+  order(id: ID!): Order
+
+  """List orders with optional filtering and pagination."""
+  orders(filter: OrderFilter, limit: Int, offset: Int): OrderConnection!
+
+  """Fetch a product by its Shipwire product ID."""
+  product(id: ID!): Product
+
+  """List products with optional filtering."""
+  products(filter: ProductFilter, limit: Int, offset: Int): ProductConnection!
+
+  """Fetch aggregate inventory for a SKU across all warehouses."""
+  inventory(sku: String!): Inventory
+
+  """List inventory records with optional filtering."""
+  inventoryList(filter: InventoryFilter, limit: Int, offset: Int): InventoryConnection!
+
+  """Fetch a warehouse by ID."""
+  warehouse(id: ID!): Warehouse
+
+  """List all active Shipwire warehouses."""
+  warehouses: [Warehouse!]!
+
+  """Fetch a shipment by ID."""
+  shipment(id: ID!): Shipment
+
+  """Get shipping rate quotes for a destination and item list."""
+  rate(input: RateInput!): Rate!
+
+  """Fetch a return order by ID."""
+  returnOrder(id: ID!): ReturnOrder
+
+  """List return orders with optional filtering."""
+  returnOrders(filter: ReturnFilter, limit: Int, offset: Int): ReturnOrderConnection!
+
+  """Fetch a receiving order by ID."""
+  receivingOrder(id: ID!): ReceivingOrder
+
+  """List receiving orders with optional filtering."""
+  receivingOrders(filter: ReceivingFilter, limit: Int, offset: Int): ReceivingOrderConnection!
+
+  """Fetch a webhook subscription by ID."""
+  webhook(id: ID!): Webhook
+
+  """List all webhook subscriptions."""
+  webhooks: [Webhook!]!
+
+  """Fetch a carrier by ID."""
+  carrier(id: ID!): Carrier
+
+  """List all carriers supported by Shipwire."""
+  carriers: [Carrier!]!
+
+  """Check stock at a specific warehouse for a given SKU."""
+  stock(warehouseId: ID!, sku: String!): Stock
+
+  """Validate a shipping address before order submission."""
+  validateAddress(input: AddressInput!): AddressValidationResult!
+
+  """List API keys for the authenticated account."""
+  apiKeys: [APIKey!]!
+}
+
+type Mutation {
+  """Submit a new outbound fulfillment order."""
+  createOrder(input: CreateOrderInput!): Order!
+
+  """Update an existing order before it has shipped."""
+  updateOrder(id: ID!, input: UpdateOrderInput!): Order!
+
+  """Cancel an order that has not yet shipped."""
+  cancelOrder(id: ID!): Order!
+
+  """Place an order on hold for manual review."""
+  holdOrder(id: ID!, reason: HoldReason!, notes: String): Hold!
+
+  """Release an active hold and resume order processing."""
+  releaseHold(id: ID!): Order!
+
+  """Add a product to the Shipwire catalog."""
+  createProduct(input: CreateProductInput!): Product!
+
+  """Update details of an existing product."""
+  updateProduct(id: ID!, input: UpdateProductInput!): Product!
+
+  """Submit an inbound Advanced Shipping Notice."""
+  createReceivingOrder(input: CreateReceivingInput!): ReceivingOrder!
+
+  """Update an existing receiving order before it arrives."""
+  updateReceivingOrder(id: ID!, input: UpdateReceivingInput!): ReceivingOrder!
+
+  """Initiate a customer return and generate a return label."""
+  createReturnOrder(input: CreateReturnInput!): ReturnOrder!
+
+  """Cancel a return order that has not yet been received."""
+  cancelReturnOrder(id: ID!): ReturnOrder!
+
+  """Subscribe to Shipwire webhook events."""
+  createWebhook(input: CreateWebhookInput!): Webhook!
+
+  """Remove a webhook subscription."""
+  deleteWebhook(id: ID!): Boolean!
+
+  """Generate a new API key for the authenticated account."""
+  createAPIKey(input: CreateAPIKeyInput!): APIKey!
+
+  """Revoke an existing API key."""
+  revokeAPIKey(id: ID!): Boolean!
+}
