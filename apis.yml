@@ -6,7 +6,7 @@ description: Shipwire is a global fulfillment and third-party logistics (3PL) pl
   serves eCommerce brands with nine distinct RESTful APIs covering order management,
   stock tracking, receiving, returns, rate shopping, product catalogs, purchase orders,
   webhooks, and address validation, enabling fully automated fulfillment workflows.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/shipwire/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -29,7 +29,7 @@ apis:
   description: Create new orders and update, cancel, or get information about existing
     outbound B2C orders. Includes shipment details such as shipping box dimensions,
     contents, and tracking information.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.shipwire.com/developers/
   baseURL: https://api.shipwire.com/
   tags:
@@ -46,7 +46,7 @@ apis:
   name: Shipwire Stock API
   description: Track inventory levels and stock across Shipwire fulfillment centers
     in real time.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.shipwire.com/developers/
   baseURL: https://api.shipwire.com/
   tags:
@@ -60,7 +60,7 @@ apis:
   name: Shipwire Receiving API
   description: Manage inbound inventory arrivals and create Advanced Shipping Notices
     (ASNs) to suppliers to streamline warehouse receiving operations.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.shipwire.com/developers/
   baseURL: https://api.shipwire.com/
   tags:
@@ -74,7 +74,7 @@ apis:
   name: Shipwire Returns API
   description: Generate return labels, postage, and return tracking information by
     notifying the Shipwire Platform when an order is being returned by a customer.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.shipwire.com/developers/
   baseURL: https://api.shipwire.com/
   tags:
@@ -88,7 +88,7 @@ apis:
   name: Shipwire Rate API
   description: Compare real-time shipping quotes across carriers and service levels,
     or by warehouse, to select the optimal carrier for each shipment.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.shipwire.com/developers/rate/
   baseURL: https://api.shipwire.com/
   tags:
@@ -102,7 +102,7 @@ apis:
   name: Shipwire Product API
   description: Manage product catalogs, marketing inserts, and product kits within
     the Shipwire fulfillment platform.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.shipwire.com/developers/
   baseURL: https://api.shipwire.com/
   tags:
@@ -116,7 +116,7 @@ apis:
   name: Shipwire Purchase Order API
   description: Create, edit, and cancel purchase orders in the Shipwire system for
     B2B fulfillment workflows. POs can be approved to generate fulfillment orders.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.shipwire.com/developers/
   baseURL: https://api.shipwire.com/
   tags:
@@ -131,7 +131,7 @@ apis:
   description: Subscribe to real-time push notifications for various fulfillment events
     to trigger workflows in external systems when order, shipment, or inventory events
     occur.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.shipwire.com/developers/
   baseURL: https://api.shipwire.com/
   tags:
@@ -145,7 +145,7 @@ apis:
   name: Shipwire Address Validation API
   description: Validate shipping addresses before submitting orders to reduce failed
     deliveries and improve fulfillment accuracy.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.shipwire.com/developers/
   baseURL: https://api.shipwire.com/
   tags:
