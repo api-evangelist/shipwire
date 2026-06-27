@@ -1,99 +1,14 @@
 {
-  "aid": "shipwire",
-  "url": "https://www.shipwire.com/blog/",
-  "retrieved": "2026-06-13",
-  "posts": [
-    {
-      "title": "Understanding and Managing Ecommerce Returns",
-      "url": "https://www.shipwire.com/blog/managing-and-understanding-ecommerce-returns/",
-      "tags": [
-        "Returns",
-        "eCommerce",
-        "Fulfillment"
-      ]
-    },
-    {
-      "title": "Apparel Fulfillment Fundamentals for E-Commerce",
-      "url": "https://www.shipwire.com/blog/apparel-fulfillment-fundamentals-for-ecommerce/",
-      "tags": [
-        "Apparel",
-        "Fulfillment",
-        "eCommerce"
-      ]
-    },
-    {
-      "title": "Cross Border Fulfillment vs. Localized Fulfillment",
-      "url": "https://www.shipwire.com/blog/Cross-Border-vs-Localized-Fulfillment/",
-      "tags": [
-        "International",
-        "Fulfillment",
-        "Logistics"
-      ]
-    },
-    {
-      "title": "Female Leaders Shine in Transforming Technology Panel",
-      "url": "https://www.shipwire.com/blog/shipwire-female-leaders/",
-      "tags": [
-        "Company",
-        "Leadership"
-      ]
-    },
-    {
-      "title": "E-commerce Acceleration due to COVID-19",
-      "url": "https://www.shipwire.com/blog/e-commerce-acceleration-covid-19/",
-      "tags": [
-        "eCommerce",
-        "Trends"
-      ]
-    },
-    {
-      "title": "Shipwire International Shipping FAQ",
-      "url": "https://www.shipwire.com/blog/shipwire-international-shipping-faq/",
-      "tags": [
-        "International",
-        "Shipping",
-        "FAQ"
-      ]
-    },
-    {
-      "title": "Fulfillment for Small, Medium and Mid-Market Businesses",
-      "url": "https://www.shipwire.com/blog/shipwire-fulfillment-for-small-to-medium-and-mid-market-businesses/",
-      "tags": [
-        "Fulfillment",
-        "SMB"
-      ]
-    },
-    {
-      "title": "Shipwire Small Parcel and Carrier FAQ",
-      "url": "https://www.shipwire.com/blog/shipwire-small-parcel-and-carrier-faq/",
-      "tags": [
-        "Shipping",
-        "Carriers",
-        "FAQ"
-      ]
-    },
-    {
-      "title": "Shipwire Carriers FAQ: FedEx, UPS & USPS",
-      "url": "https://www.shipwire.com/blog/shipwire-carriers-faq-fedex-ups-usps/",
-      "tags": [
-        "Carriers",
-        "FedEx",
-        "UPS",
-        "USPS",
-        "FAQ"
-      ]
-    }
-  ],
   "repo": "shipwire",
   "feeds": [
     {
-      "source": "https://github.com/shipwire",
-      "feed_url": "https://github.com/shipwire",
-      "title": "",
+      "source": "https://www.shipwire.com/blog/",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T13:09:51Z",
+  "agent_pulled": "2026-06-27"
 }
