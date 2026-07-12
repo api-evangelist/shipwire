@@ -155,6 +155,8 @@ apis:
   - type: Documentation
     url: https://www.shipwire.com/developers/
 common:
+- type: DomainSecurity
+  url: security/shipwire-domain-security.yml
 - type: Website
   url: https://www.shipwire.com/
 - type: Documentation
