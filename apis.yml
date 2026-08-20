@@ -28,6 +28,17 @@ tags:
 - Fulfillment
 - Logistics
 - 3PL
+- E-Commerce
+- Shipping
+- Warehousing
+- Inventory
+- Order
+- Returns
+- Carriers
+tags_raw:
+- Fulfillment
+- Logistics
+- 3PL
 - eCommerce
 - Shipping
 - Warehousing
@@ -45,6 +56,11 @@ apis:
   humanURL: https://www.shipwire.com/developers/
   baseURL: https://api.shipwire.com/
   tags:
+  - Order
+  - Fulfillment
+  - Shipping
+  - Tracking
+  tags_raw:
   - Orders
   - Fulfillment
   - Shipping
@@ -118,6 +134,10 @@ apis:
   humanURL: https://www.shipwire.com/developers/
   baseURL: https://api.shipwire.com/
   tags:
+  - Product
+  - Catalog
+  - Inventory
+  tags_raw:
   - Products
   - Catalog
   - Inventory
@@ -147,6 +167,10 @@ apis:
   humanURL: https://www.shipwire.com/developers/
   baseURL: https://api.shipwire.com/
   tags:
+  - Webhook
+  - Event
+  - Notification
+  tags_raw:
   - Webhooks
   - Events
   - Notifications
