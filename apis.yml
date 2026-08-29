@@ -6,6 +6,17 @@ description: Shipwire is a global fulfillment and third-party logistics (3PL) pl
   serves eCommerce brands with nine distinct RESTful APIs covering order management,
   stock tracking, receiving, returns, rate shopping, product catalogs, purchase orders,
   webhooks, and address validation, enabling fully automated fulfillment workflows.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: unknown
