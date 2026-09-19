@@ -45,7 +45,7 @@ tags:
 - Inventory
 - Order
 - Returns
-- Carriers
+- Carrier
 tags_raw:
 - Fulfillment
 - Logistics
@@ -90,6 +90,10 @@ apis:
   baseURL: https://api.shipwire.com/
   tags:
   - Inventory
+  - Stocks
+  - Warehousing
+  tags_raw:
+  - Inventory
   - Stock
   - Warehousing
   properties:
@@ -131,6 +135,10 @@ apis:
   humanURL: https://www.shipwire.com/developers/rate/
   baseURL: https://api.shipwire.com/
   tags:
+  - Rates
+  - Carrier
+  - Shipping
+  tags_raw:
   - Rates
   - Carriers
   - Shipping
