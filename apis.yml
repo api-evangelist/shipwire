@@ -79,8 +79,6 @@ apis:
   properties:
   - type: Documentation
     url: https://www.shipwire.com/developers/
-  - url: graphql/shipwire-graphql.md
-    type: GraphQL
 - aid: shipwire:shipwire-stock-api
   name: Shipwire Stock API
   description: Track inventory levels and stock across Shipwire fulfillment centers
@@ -242,8 +240,6 @@ common:
   url: https://api.beta.shipwire.com/
 - type: DeveloperPortal
   url: https://www.shipwire.com/platform/empower-developers/
-- url: graphql/shipwire-graphql.md
-  type: GraphQL
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
