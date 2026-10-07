@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Shipwire API Rate Limits
 description: Shipwire's REST API (v3) rate limit details are not publicly documented. The API uses bearer token authentication and supports pagination with a recommended maximum of 200 records per request. Developers should contact Shipwire support for specific rate limit thresholds applicable to their account tier.
 url: https://www.shipwire.com/developers/getting-started/

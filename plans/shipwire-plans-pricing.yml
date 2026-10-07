@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Shipwire Plans and Pricing
 description: Shipwire uses a pay-as-you-go pricing model based on actual usage of fulfillment services. There are no fixed subscription tiers for the software itself; charges are incurred for warehousing, pick and pack, shipping, and ancillary services.
 url: https://www.shipwire.com/support/policy-fees-minimum-balance-and-ancillary-charges/
