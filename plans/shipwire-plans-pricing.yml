@@ -82,3 +82,17 @@ fees:
     description: Monthly interest rate on past-due balances
     rate: 1.5
     unit: percent per month (or highest rate permitted by law)
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: Pay-As-You-Go
+    access: other
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods: []
