@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/shipwire/integrations
+- https://n8n.io/integrations/shipwire/
+- https://composio.dev/toolkits/shipwire
+- https://monid.ai/tools/shipwire
+checked:
+- https://composio.dev/toolkits/shipwire
+- https://monid.ai/tools/shipwire
+- https://n8n.io/integrations/shipwire/
+- https://zapier.com/apps/shipwire/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
