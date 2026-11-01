@@ -64,32 +64,120 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Shipwire is a global fulfillment and third-party logistics (3PL) platform providing a REST API for managing orders, inventory, warehousing, shipments, returns, and carrier selection across a worldwide network of fulfillment centers. The platform serves eCommerce brands with nine distinct RESTful APIs covering order management, stock tracking, receiving, returns, rate shopping, product catalogs, purchase orders, webhooks, and address validation.
+Shipwire is a global fulfillment and third-party logistics (3PL) platform providing a REST API for managing orders, inventory, warehousing, shipments, returns, and carrier selection across a worldwide network of fulfillment centers. The platform serves eCommerce brands with nine distinct RESTful APIs covering order management, stock tracking, receiving, returns, rate shopping, product catalogs, purchase orders, webhooks, and address validation, enabling fully automated fulfillment workflows.
 
-**API Version:** v3 (REST)  
-**Base URL:** https://api.shipwire.com/  
-**Sandbox:** https://api.beta.shipwire.com/  
-**Authentication:** Bearer Token (ShipwireKey)
+**Areas:** Fulfillment · Logistics · 3PL · E-Commerce · Shipping · Warehousing · Inventory · Order · Returns · Carrier
 
-## Resources
+## Shipwire on APIs.io
 
-- [Developer Portal](https://www.shipwire.com/developers/)
-- [Getting Started](https://www.shipwire.com/developers/getting-started/)
-- [Client Libraries](https://www.shipwire.com/developers/client-libraries/)
-- [Pricing & Fees](https://www.shipwire.com/support/policy-fees-minimum-balance-and-ancillary-charges/)
-- [Status Page](https://status.shipwire.com)
+Everything profiled for Shipwire is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/shipwire/](https://apis.io/providers/shipwire/)** — or go straight to one of the APIs or properties below.
+
+### APIs (9)
+
+- [Shipwire Order API](https://apis.io/apis/shipwire/shipwire-order-api/) — Create new orders and update, cancel, or get information about existing outbound B2C orders. Includes shipment details such as shipping box dimensions,…
+- [Shipwire Stock API](https://apis.io/apis/shipwire/shipwire-stock-api/) — Track inventory levels and stock across Shipwire fulfillment centers in real time.
+- [Shipwire Receiving API](https://apis.io/apis/shipwire/shipwire-receiving-api/) — Manage inbound inventory arrivals and create Advanced Shipping Notices (ASNs) to suppliers to streamline warehouse receiving operations.
+- [Shipwire Returns API](https://apis.io/apis/shipwire/shipwire-returns-api/) — Generate return labels, postage, and return tracking information by notifying the Shipwire Platform when an order is being returned by a customer.
+- [Shipwire Rate API](https://apis.io/apis/shipwire/shipwire-rate-api/) — Compare real-time shipping quotes across carriers and service levels, or by warehouse, to select the optimal carrier for each shipment.
+- [Shipwire Product API](https://apis.io/apis/shipwire/shipwire-product-api/) — Manage product catalogs, marketing inserts, and product kits within the Shipwire fulfillment platform.
+- [Shipwire Purchase Order API](https://apis.io/apis/shipwire/shipwire-purchase-order-api/) — Create, edit, and cancel purchase orders in the Shipwire system for B2B fulfillment workflows. POs can be approved to generate fulfillment orders.
+- [Shipwire Webhooks API](https://apis.io/apis/shipwire/shipwire-webhooks-api/) — Subscribe to real-time push notifications for various fulfillment events to trigger workflows in external systems when order, shipment, or inventory events…
+- [Shipwire Address Validation API](https://apis.io/apis/shipwire/shipwire-address-validation-api/) — Validate shipping addresses before submitting orders to reduce failed deliveries and improve fulfillment accuracy.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Moved to /providers/shipwire/](https://apis.io/graphqls/shipwire/shipwire-graphql/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Shipwire Domain Security](https://apis.io/security/shipwire/shipwire-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Shipwire Plans Pricing](https://apis.io/plans/shipwire/shipwire-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Shipwire Rate Limits](https://apis.io/rate-limits/shipwire/shipwire-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Shipwire Finops](https://apis.io/finops/shipwire/shipwire-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.shipwire.com/)
+- [Documentation](https://www.shipwire.com/developers/)
+- [Getting started](https://www.shipwire.com/developers/getting-started/)
+- [Pricing](https://www.shipwire.com/support/policy-fees-minimum-balance-and-ancillary-charges/)
 - [Blog](https://www.shipwire.com/blog/)
+- [Status](https://status.shipwire.com)
 
-## APIs
+## API Evangelist rating
 
-- Order API
-- Stock API
-- Receiving API
-- Returns API
-- Rate API
-- Product API
-- Purchase Order API
-- Webhooks API
-- Address Validation API
+**Kin Score 17.4** — emerging · rubric 0.24.0 · scored 2026-10-17
 
-**Maintained by:** [API Evangelist](https://apievangelist.com)
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 33.3 |
+| Access clarity | 15.8 |
+
+**Agent readiness 0.6** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.0** — Telecommunications
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/shipwire/](https://apis.io/providers/shipwire/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Shipwire: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/shipwire/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
